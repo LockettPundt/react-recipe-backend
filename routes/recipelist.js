@@ -10,15 +10,14 @@ const router = express.Router();
 
 router.get('/', async (req, res, next) => {
   const recipeNames = await recipeModel.getAll();
+  console.log(recipeNames);
+  res.json({
 
-  res.json([{
-
-    title: 'Recipes',
-    recipeNames,
+    recipes: recipeNames,
     session: req.session,
 
 
-  }]);
+  });
 });
 
 router.get('/:id?', async (req, res) => {
@@ -28,18 +27,14 @@ router.get('/:id?', async (req, res) => {
   const submittedBy = await recipeModel.getReviewer(id);
   const comments = await recipeModel.getComments(id);
   const commenter = await userModel.getCommenter(user_id);
-  res.render('template', {
-    locals: {
-      title: recipeInfo ? recipeInfo[0].name : 'Whoops no recipe here!',
-      recipeInfo,
-      session: req.session,
-      submittedBy,
-      comments,
-      commenter,
-    },
-    partials: {
-      partial: 'partial-singlerecipe',
-    },
+  res.json({
+
+    title: recipeInfo ? recipeInfo[0].name : 'Whoops no recipe here!',
+    recipeInfo,
+    session: req.session,
+    submittedBy,
+    comments,
+    commenter,
   });
 });
 
