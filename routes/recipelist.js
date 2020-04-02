@@ -11,16 +11,14 @@ const router = express.Router();
 router.get('/', async (req, res, next) => {
   const recipeNames = await recipeModel.getAll();
 
-  res.render('template', {
-    locals: {
-      title: 'Recipes',
-      recipeNames,
-      session: req.session,
-    },
-    partials: {
-      partial: 'partial-recipelist',
-    },
-  });
+  res.json([{
+
+    title: 'Recipes',
+    recipeNames,
+    session: req.session,
+
+
+  }]);
 });
 
 router.get('/:id?', async (req, res) => {
