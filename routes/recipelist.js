@@ -10,32 +10,18 @@ const router = express.Router();
 
 router.get('/', async (req, res, next) => {
   const recipeNames = await recipeModel.getAll();
-  console.log(recipeNames);
-  res.json({
-
-    recipes: recipeNames,
-    session: req.session,
-
-
-  });
+  // console.log(recipeNames);
+  res.json(recipeNames).status(200);
 });
 
 router.get('/:id?', async (req, res) => {
   const { id } = req.params;
-  const { user_id } = req.session;
+  // const { user_id } = req.session;
   const recipeInfo = await recipeModel.getOne(id);
   const submittedBy = await recipeModel.getReviewer(id);
   const comments = await recipeModel.getComments(id);
-  const commenter = await userModel.getCommenter(user_id);
-  res.json({
-
-    title: recipeInfo ? recipeInfo[0].name : 'Whoops no recipe here!',
-    recipeInfo,
-    session: req.session,
-    submittedBy,
-    comments,
-    commenter,
-  });
+  // const commenter = await userModel.getCommenter(user_id);
+  res.json([recipeInfo, comments, submittedBy]).status(200);
 });
 
 router.post('/', async (req, res) => {
