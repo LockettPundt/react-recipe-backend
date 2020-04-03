@@ -12,26 +12,21 @@ let emailStatus = '';
 
 
 router.get('/', async (req, res, next) => {
-  res.render('template', {
-    locals: {
-      title: 'User Log in',
-      session: req.session,
-    },
-    partials: {
-      partial: 'partial-users',
-    },
+  res.json({
+
+    title: 'User Log in',
+    session: req.session,
+
   });
 });
 
 router.get('/login', async (req, res) => {
-  res.render('template', {
-    locals: {
-      title: 'Log in',
-      session: req.session,
-    },
-    partials: {
-      partial: 'partial-login',
-    },
+  res.json({
+
+    title: 'Log in',
+    session: req.session,
+
+
   });
 });
 
