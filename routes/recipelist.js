@@ -20,8 +20,8 @@ router.get('/:id?', async (req, res) => {
   const recipeInfo = await recipeModel.getOne(id);
   const submittedBy = await recipeModel.getReviewer(id);
   const comments = await recipeModel.getComments(id);
-  // const commenter = await userModel.getCommenter(user_id);
-  res.json([recipeInfo, comments, submittedBy]).status(200);
+  const commenter = await userModel.getCommenter(id);
+  res.json([recipeInfo, submittedBy, commenter]).status(200);
 });
 
 router.post('/', async (req, res) => {
