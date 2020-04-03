@@ -25,20 +25,34 @@ router.get('/:id?', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
+  // const {
+  //   user_id, first_name, last_name, title, rating, ingredients, directions, img_upload,
+  // } = req.body;
   const {
-    user_id, first_name, last_name, title, rating, ingredients, directions, img_upload,
+    titleValue, rateValue, directionsValue, ingredientsValue, imageValue, userId,
   } = req.body;
-  recipeModel.addRecipe(title, rating, directions, ingredients, img_upload, user_id);
-  res.redirect(200, '/recipelist');
+  recipeModel.addRecipe(
+    titleValue,
+    rateValue,
+    directionsValue,
+    ingredientsValue,
+    imageValue,
+    userId,
+  );
+  res.status(200);
 });
 
 router.post('/:id', async (req, res) => {
   // const { id } = req.params;
+  // const {
+  //   title, user_id, rating, comment,
+  // } = req.body;
   const {
-    title, user_id, rating, comment,
+    titleValue, userId, ratingValue, commentValue,
   } = req.body;
+  // console.log(req.body);
   // hard coded ID for now
-  userModel.leaveComment(title, comment, rating, user_id, 3);
+  userModel.leaveComment(titleValue, commentValue, ratingValue, userId, 3);
   res.status(200);
 });
 
