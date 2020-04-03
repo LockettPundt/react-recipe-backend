@@ -1,4 +1,6 @@
 const express = require('express');
+// const session = require('express-session');
+// const FileStore = require('session-file-store')(session);
 const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -7,6 +9,7 @@ const cors = require('cors');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const recipelistRouter = require('./routes/recipelist');
+
 
 const corsOptions = {
   origin: '*',
@@ -17,7 +20,18 @@ const corsOptions = {
   'Access-Control-Allow-Headers':
     'Origin, X-Requested-With, Content-Type, Accept',
 };
+
+
 const app = express();
+
+// app.use(session({
+//   store: new FileStore(),
+//   secret: 'secret',
+//   resave: false,
+//   saveUninitialized: true,
+//   is_logged_in: false,
+// }));
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
