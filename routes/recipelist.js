@@ -33,12 +33,13 @@ router.post('/', async (req, res) => {
 });
 
 router.post('/:id', async (req, res) => {
-  const { id } = req.params;
+  // const { id } = req.params;
   const {
     title, user_id, rating, comment,
   } = req.body;
-  userModel.leaveComment(title, comment, rating, user_id, id);
-  res.redirect(200, '/recipelist');
+  // hard coded ID for now
+  userModel.leaveComment(title, comment, rating, user_id, 3);
+  res.status(200);
 });
 
 module.exports = router;
