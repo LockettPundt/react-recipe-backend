@@ -62,7 +62,7 @@ class UserModel {
 
   static async getCommenter(id) {
     try {
-      const response = await db.one(`SELECT * FROM users WHERE id = ${id};`);
+      const response = await db.any(`SELECT users.first_name, users.last_name, comments.title, comments.rating, comments.comment FROM users JOIN comments ON users.id = users_id WHERE comments.recipes_id = ${id};`);
       return response;
     } catch (error) {
       return error;
