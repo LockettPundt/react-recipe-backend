@@ -48,11 +48,11 @@ router.post('/:id', async (req, res) => {
   //   title, user_id, rating, comment,
   // } = req.body;
   const {
-    titleValue, userId, ratingValue, commentValue,
+    titleValue, userId, ratingValue, commentValue, id,
   } = req.body;
   // console.log(req.body);
   // hard coded ID for now
-  userModel.leaveComment(titleValue, commentValue, ratingValue, userId, 3);
+  userModel.leaveComment(titleValue, commentValue, ratingValue, userId, id);
   res.status(200);
 });
 
